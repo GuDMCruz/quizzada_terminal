@@ -1,4 +1,7 @@
+import 'package:quizzada_terminal/jogador.dart';
+import 'package:quizzada_terminal/partida.dart';
 import 'package:quizzada_terminal/pergunta.dart';
+import 'dart:io';
 
 void main() {
   List<Map<String, dynamic>> dados = [
@@ -33,8 +36,18 @@ void main() {
       'dificuldade': 'dificil',
     },
   ];
-
   final perguntas = dados.map(Pergunta.fromMap).toList();
+  String? nome;
+  Jogador jogador;
+  Partida partida;
+
+  while(nome == null || nome == ''){
+    stdout.write('Seu nome: ');
+    nome = stdin.readLineSync()?.trim();
+  }
+
+  jogador = Jogador(nome: nome);
+  partida = Partida(perguntas: perguntas, jogador: jogador);
 
 
   print('Bem-vindo ao Quizzada!');
