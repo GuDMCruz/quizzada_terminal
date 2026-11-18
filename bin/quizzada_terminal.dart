@@ -1,6 +1,7 @@
 import 'package:quizzada_terminal/jogador.dart';
 import 'package:quizzada_terminal/partida.dart';
 import 'package:quizzada_terminal/pergunta.dart';
+
 import 'dart:io';
 
 void main() {
@@ -41,7 +42,7 @@ void main() {
   Jogador jogador;
   Partida partida;
 
-  while(nome == null || nome == ''){
+  while (nome == null || nome == '') {
     stdout.write('Seu nome: ');
     nome = stdin.readLineSync()?.trim();
   }
@@ -49,6 +50,9 @@ void main() {
   jogador = Jogador(nome: nome);
   partida = Partida(perguntas: perguntas, jogador: jogador);
 
+  for (int i = 0; i < perguntas.length; i++) {
+    print(partida.mostraTexto(i));
+  }
 
   print('Bem-vindo ao Quizzada!');
 }
