@@ -59,3 +59,9 @@ dart format .
 ## Bônus
 
 Nenhum bônus foi implementado nesta versão.
+
+## Apresentação
+
+Assista aos vídeos com a explicação do código e uma demonstração do jogo:
+
+https://drive.google.com/drive/folders/1TJELPUIMcSiIc5oxW1SjEdw4gMk5Q35D?usp=sharing
