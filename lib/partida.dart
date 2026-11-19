@@ -1,10 +1,12 @@
 import 'package:quizzada_terminal/jogador.dart';
 import 'package:quizzada_terminal/pergunta.dart';
+import 'package:quizzada_terminal/resposta_invalida_exception.dart';
 
 class Partida {
   Jogador jogador;
   List<Pergunta> perguntas;
   final letras = ['A) ', 'B) ', 'C) ', 'D) '];
+  int acertos = 0;
 
   Partida({required this.perguntas, required this.jogador});
 
@@ -19,5 +21,39 @@ class Partida {
     }
 
     return textoRetorno;
+  }
+
+  String valida(String res, int i) {
+    int resposta = -1;
+
+    res = res.trim().toUpperCase();
+
+    if (res == '') {
+      throw RespostaInvalidaException(mensagem: 'Aviso: Digite uma letra.');
+    }
+
+    if (res != 'A' && res != 'B' && res != 'C' && res != 'D') {
+      throw RespostaInvalidaException(
+        mensagem: 'Aviso: "$res" não é uma alternativa. Use A, B, C, D.',
+      );
+    }
+
+    if (res == 'A') {
+      resposta = 0;
+    } else if (res == 'B') {
+      resposta = 1;
+    } else if (res == 'C') {
+      resposta = 2;
+    } else if (res == 'D') {
+      resposta = 3;
+    }
+
+    if (resposta == perguntas[i].indiceCorreto) {
+      jogador.adicionarPontos(perguntas[i].dificuldade.pontos);
+      acertos++;
+      return 'Acertou! +${perguntas[i].dificuldade.pontos}';
+    }
+
+    return 'Errou! A resposta correta era: ${letras[perguntas[i].indiceCorreto]}';
   }
 }

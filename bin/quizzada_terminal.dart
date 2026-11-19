@@ -4,6 +4,8 @@ import 'package:quizzada_terminal/pergunta.dart';
 
 import 'dart:io';
 
+import 'package:quizzada_terminal/resposta_invalida_exception.dart';
+
 void main() {
   List<Map<String, dynamic>> dados = [
     {
@@ -42,6 +44,8 @@ void main() {
   Jogador jogador;
   Partida partida;
 
+  print('Bem-vindo ao Quizzada!');
+
   while (nome == null || nome == '') {
     stdout.write('Seu nome: ');
     nome = stdin.readLineSync()?.trim();
@@ -52,7 +56,17 @@ void main() {
 
   for (int i = 0; i < perguntas.length; i++) {
     print(partida.mostraTexto(i));
-  }
 
-  print('Bem-vindo ao Quizzada!');
+    while (true) {
+      stdout.write('Sua resposta: ');
+      String resposta = stdin.readLineSync() ?? '';
+
+      try {
+        print(partida.valida(resposta, i));
+        break;
+      } on RespostaInvalidaException catch (erro) {
+        print(erro.mensagem);
+      }
+    }
+  }
 }
