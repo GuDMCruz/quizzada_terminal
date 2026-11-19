@@ -56,4 +56,16 @@ class Partida {
 
     return 'Errou! A resposta correta era: ${letras[perguntas[i].indiceCorreto]}';
   }
+
+  String mostraResultado() {
+    String resultado = 'Nome do jogador: ${jogador.nome}\n';
+    resultado += 'Pontos obtidos: ${jogador.pontos}\n';
+    resultado +=
+        'Pontos totais: ${perguntas.fold<int>(0, (total, pergunta) {
+          return total + pergunta.dificuldade.pontos;
+        })}\n';
+    resultado += '$acertos/${perguntas.length} perguntas acertadas!';
+
+    return resultado;
+  }
 }

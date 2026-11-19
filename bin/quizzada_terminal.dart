@@ -68,5 +68,7 @@ void main() {
         print(erro.mensagem);
       }
     }
+
+    print(partida.mostraResultado());
   }
 }
